@@ -1,0 +1,49 @@
+type Query {
+  job(id: ID!): Job
+  jobs: [Job!]
+  company(id: ID!): Company
+}
+
+type Mutation {
+  createJob(input: CreateJobInput!): Job
+  updateJob(input: UpdateJobInput!): Job
+  deleteJob(input: DeleteJobInput!): Job
+}
+
+type Company {
+  id: ID!
+  name: String!
+  description: String
+  jobs: [Job!]!
+}
+
+# scalar DateTime
+
+"""
+Represents a job ad posted on our board.
+""" #This is a regular comment.
+type Job {
+  id: ID!
+  company: Company!
+  title: String!
+  description: String
+  """
+  The __date__ when the job was published, in ISO-8601 format. E.g. `2025-12-31`.
+  """
+  date: String!
+}
+
+input CreateJobInput {
+  title: String!
+  description: String
+}
+
+input UpdateJobInput {
+  id: ID!
+  title: String
+  description: String
+}
+
+input DeleteJobInput {
+  id: String!
+}
