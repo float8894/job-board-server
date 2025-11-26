@@ -1,5 +1,6 @@
 import cors from 'cors';
 import express from 'express';
+import gql from 'graphql-tag';
 import { readFile } from 'node:fs/promises';
 import { authMiddleware, handleLogin } from './auth.js';
 import { expressMiddleware as apolloMiddleware } from '@as-integrations/express4';
@@ -15,7 +16,8 @@ app.use(cors(), express.json(), authMiddleware);
 
 app.post('/login', handleLogin);
 
-const typeDefs = await readFile('./schema.graphql', 'utf8');
+const rawSDL = await readFile('./schema.graphql', 'utf8');
+const typeDefs = gql(rawSDL);
 
 const getContext = async ({ req }) => {
   const companyLoader = createCompanyLoader();

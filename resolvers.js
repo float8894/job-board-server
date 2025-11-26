@@ -16,8 +16,8 @@ export const resolvers = {
       if (!job) throw notFoundError(`No Job Found with ID: '${id}'`);
       return job;
     },
-    jobs: async () => {
-      const jobs = await getJobs();
+    jobs: async (_root, { limit }) => {
+      const jobs = await getJobs(limit);
       return jobs;
     },
     company: async (_root, { id }) => {

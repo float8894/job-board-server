@@ -1,6 +1,6 @@
 type Query {
   job(id: ID!): Job
-  jobs: [Job!]
+  jobs(limit: Int): [Job!]
   company(id: ID!): Company
 }
 
