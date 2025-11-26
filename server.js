@@ -18,7 +18,7 @@ const typeDefs = await readFile('./schema.graphql', 'utf8');
 
 const getContext = async ({ req }) => {
   if (req.auth) {
-    console.log('[getContext] req.auth', req.auth);
+    // console.log('[getContext] req.auth', req.auth);
     const user = await getUser(req.auth.sub);
     return { user };
   }
